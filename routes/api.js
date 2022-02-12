@@ -39,11 +39,14 @@ const jwtValidate = (req, res, next) => {
 let refreshTokens = [];
 
 router.get("/validateToken", jwtValidate, (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   if (!req.error) res.json(req.id.id);
   if (req.error) res.json({ error: true });
 });
 
 router.post("/getaccess", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
   const refreshToken = req.body.token;
   if (refreshToken == null) res.sendStatus(401);
   if (!refreshTokens.includes(refreshToken)) res.sendStatus(403);
@@ -57,6 +60,8 @@ router.post("/getaccess", (req, res) => {
 });
 
 router.post("/requestOtp", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
   let mNumber = req.body.id;
   let checkuser = await mongoFunction.userIdentiferWithMNumber(mNumber);
   if (checkuser.status) {
@@ -72,6 +77,8 @@ router.post("/requestOtp", async (req, res) => {
 });
 
 router.post("/validateOtp", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
   let jsonData = JSON.parse(req.body.data);
   let checkuser = await mongoFunction.userIdentiferWithMNumber(jsonData.Number);
   if (checkuser.status) {
@@ -92,6 +99,8 @@ router.post("/validateOtp", async (req, res) => {
 });
 
 router.post("/getSongs", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
   let userId = req.body.data;
 
   let checkuser = await mongoFunction.userIdentifer(userId);
@@ -102,6 +111,8 @@ router.post("/getSongs", async (req, res) => {
 });
 
 router.post("/deleteSong", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
   // console.log("inside Del song");
   console.log(req.body);
   let userId = req.body.data.uid;
