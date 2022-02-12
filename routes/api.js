@@ -38,7 +38,7 @@ const jwtValidate = (req, res, next) => {
 };
 let refreshTokens = [];
 
-router.get("/", , (req, res) => {
+router.get("/", (req, res) => {
 res.send("success")
 });
 
