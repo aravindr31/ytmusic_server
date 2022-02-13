@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "pm2 start ecosystem.config.js --env development",
-    "start": "nodemon start"
+    "dev": "nodemon server.js",
+    "start": "pm2 start server.js --watch"
   },
   "keywords": [],
   "author": "",
@@ -22,9 +22,9 @@
     "mongodb": "^4.3.1",
     "pm2": "^5.1.2",
     "pusher": "^5.0.1",
-    "telegraf": "^4.6.0",
-     "nodemon": "^2.0.15"
+    "telegraf": "^4.6.0"
   },
   "devDependencies": {
+  "nodemon": "^2.0.15"
   }
 }

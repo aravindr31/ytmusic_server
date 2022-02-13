@@ -10,7 +10,6 @@ const cors = require("cors");
 const { Telegraf } = require("telegraf");
 const bot = new Telegraf(process.env.BOT_TOKEN);
 var jwt = require("jsonwebtoken");
-// const apiRouter = require("./routes/api");
 
 const pusher = new Pusher({
   appId: process.env.PUSHER_APP_ID,
