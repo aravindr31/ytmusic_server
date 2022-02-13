@@ -90,7 +90,7 @@ const jwtValidate = (req, res, next) => {
 let refreshTokens = [];
 
 app.get("/api/", (req, res) => {
-  res.send("success");
+  res.send("success").status(200);
 });
 
 app.get("/api/validateToken", jwtValidate, (req, res) => {
