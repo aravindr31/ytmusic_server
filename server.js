@@ -9,6 +9,7 @@ const pm2 = require("pm2");
 const cors = require("cors");
 const { Telegraf } = require("telegraf");
 const bot = new Telegraf(process.env.BOT_TOKEN);
+var jwt = require("jsonwebtoken");
 // const apiRouter = require("./routes/api");
 
 const pusher = new Pusher({
