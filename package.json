@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2 start server.js --watch",
-    "dev": "nodemon start"
+    "dev": "pm2 start ecosystem.config.js --env development",
+    "start": "nodemon start"
   },
   "keywords": [],
   "author": "",

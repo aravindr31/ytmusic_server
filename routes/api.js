@@ -39,7 +39,7 @@ const jwtValidate = (req, res, next) => {
 let refreshTokens = [];
 
 router.get("/", (req, res) => {
-res.send("success")
+  res.send("success");
 });
 
 router.get("/validateToken", jwtValidate, (req, res) => {
