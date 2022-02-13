@@ -3,10 +3,14 @@ module.exports = {
     {
       name: "YTMSERVER",
       script: "./server.js",
+      instances: "max",
       watch: true,
-      env: {
-        NODE_ENV: "development", // define env variables here
-      },
+      // env: {
+      //   NODE_ENV: "development",
+      // },
+      // env_production: {
+      //   NODE_ENV: "production",
+      // },
     },
   ],
 };
