@@ -174,6 +174,15 @@ app.post("/api/deleteSong", async (req, res) => {
   }
 });
 
+app.post("/api/getSongData", async (req, res) => {
+  let dataReceived = req.body;
+  let checkuser = await mongoFunction.userIdentifer(dataReceived.userId);
+  if (checkuser.status) {
+    const songMeta = await botFunction.getSongMeta(dataReceived.videoId);
+    res.json(songMeta);
+  }
+});
+
 bot.command("stopBot", async (ctx) => {
   if (ctx.message.chat.id == "300646207") {
     ctx.reply("Stopping Bot... GoodBye");

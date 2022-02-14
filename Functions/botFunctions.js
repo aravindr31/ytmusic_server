@@ -1,5 +1,6 @@
 const { getLinkPreview } = require("link-preview-js");
 const dbFunction = require("./mongoFunctions");
+const ydl = require("youtube-dl-exec");
 module.exports = {
   gettitle: (videoId) => {
     return new Promise(async (resolve, reject) => {
@@ -20,6 +21,20 @@ module.exports = {
       }
       await dbFunction.insertOtp(userId, OTP);
       resolve(OTP);
+    });
+  },
+  getSongMeta: (videoid) => {
+    return new Promise(async (resolve, reject) => {
+      const out = await ydl(`https://www.youtube.com/watch?v=${videoid}`, {
+        dumpSingleJson: true,
+        noWarnings: true,
+        noCallHome: true,
+        noCheckCertificate: true,
+        preferFreeFormats: true,
+        youtubeSkipDashManifest: true,
+        extractAudio: true,
+      });
+      resolve(out);
     });
   },
 };
