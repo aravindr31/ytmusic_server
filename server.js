@@ -37,7 +37,7 @@ db.connect((err) => {
 const pusherFunction = async () => {
   const changeStream = db.get().collection("songs").watch();
   changeStream.on("change", (change) => {
-    console.log(change);
+    // console.log(change);
     if (change.operationType == "update") {
       const details = change?.updateDescription.updatedFields;
       if (!details.Eotp) {
@@ -48,7 +48,7 @@ const pusherFunction = async () => {
     } else if (change.operationType == "insert") {
       console.log("new user added");
     } else if (change.operationType == "replace") {
-      console.log(change);
+      // console.log(change);
     } else {
       console.log("unidentified change comming through \n" + change);
     }
@@ -127,8 +127,12 @@ app.post("/api/requestOtp", async (req, res) => {
 });
 
 app.post("/api/validateOtp", async (req, res) => {
-  let jsonData = JSON.parse(req.body.data);
+  console.log("<<<<>>>>>>", req.body);
+  // let jsonData = JSON.parse(req.body.data);
+  let jsonData = req.body;
+  console.log(jsonData);
   let checkuser = await mongoFunction.userIdentiferWithMNumber(jsonData.Number);
+  console.log(checkuser);
   if (checkuser.status) {
     let validateData = await mongoFunction.validateOTP(
       checkuser.chatId,

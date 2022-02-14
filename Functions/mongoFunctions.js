@@ -50,6 +50,7 @@ module.exports = {
     });
   },
   validateOTP: (id, otp) => {
+    console.log(id, otp);
     return new Promise(async (resolve, reject) => {
       let eOtp = await db
         .get()
