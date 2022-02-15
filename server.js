@@ -253,6 +253,7 @@ bot.command("deleteAll", async (ctx) => {
 let storentData = {};
 let splitedUrl = [];
 let update;
+
 bot.on("message", async (ctx) => {
   console.log(ctx.message.from);
   const userId = ctx.message.from.id;

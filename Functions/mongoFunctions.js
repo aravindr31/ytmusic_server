@@ -4,15 +4,13 @@ const bcrypt = require("bcrypt");
 
 module.exports = {
   userIdentifer: (uid) => {
-    console.log(uid, "<<<<<<<<<<>>>>>>>>>>>");
     return new Promise(async (resolve, reject) => {
       let userCheck = await db
         .get()
         ?.collection(process.env.DB_COLLECTION)
         .findOne({ id: parseInt(uid) });
-      // console.log(userCheck);
       if (userCheck == null) {
-        console.log("failed here");
+        console.log("--usercheck Failed");
         resolve({ status: false });
       } else {
         resolve({ status: true, chatId: userCheck.id });
@@ -20,15 +18,13 @@ module.exports = {
     });
   },
   userIdentiferWithMNumber: (id) => {
-    console.log(">>>>>" + id);
     return new Promise(async (resolve, reject) => {
       let userCheck = await db
         .get()
         ?.collection("songs")
         .findOne({ phone: id });
-      // console.log(userCheck);
       if (userCheck == null) {
-        console.log("falied");
+        console.log("--usercheck with mobile failed");
         resolve({ status: false });
       } else {
         resolve({ status: true, chatId: userCheck.id });
@@ -41,7 +37,6 @@ module.exports = {
         otp,
         parseInt(process.env.saltRound)
       );
-      console.log(">>>>>>><<<<<<<<<<" + userId, encryptedOtp);
       await db
         .get()
         .collection(process.env.DB_COLLECTION)
@@ -50,7 +45,6 @@ module.exports = {
     });
   },
   validateOTP: (id, otp) => {
-    console.log(id, otp);
     return new Promise(async (resolve, reject) => {
       let eOtp = await db
         .get()
@@ -67,9 +61,7 @@ module.exports = {
           },
         ])
         .toArray();
-      console.log(eOtp[0].Eotp);
       let validate = await bcrypt.compare(otp, eOtp[0].Eotp);
-      console.log(validate);
       resolve(validate);
     });
   },
@@ -80,7 +72,7 @@ module.exports = {
         .collection(process.env.DB_COLLECTION)
         .findOne({ id: data.user_id });
       if (userCheck != null) {
-        console.log("user already exist" + userCheck);
+        console.log("-- user already exist");
         resolve({ status: false });
       } else {
         await db
@@ -162,21 +154,18 @@ module.exports = {
           },
         ])
         .toArray();
-      console.log(songData);
       resolve(songData);
     });
   },
   deleteIndSong: (uid, vid) => {
-    console.log(uid, vid);
     return new Promise(async (resolve, reject) => {
-      let newData = await db
+      await db
         .get()
         .collection(process.env.DB_COLLECTION)
         .updateOne(
           { id: parseInt(uid) },
           { $pull: { data: { videoId: vid } } }
         );
-      // console.log(newData);
       resolve({ status: true });
     });
   },
