@@ -27,7 +27,8 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       const info = await ytdl.getInfo(videoid);
       const audio = ytdl.filterFormats(info.formats, "audioonly");
-      resolve(audio[0]);
+      console.log(audio);
+      resolve(audio[1]);
     });
   },
 };

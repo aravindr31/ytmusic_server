@@ -90,7 +90,13 @@ const jwtValidate = (req, res, next) => {
 let refreshTokens = [];
 
 app.get("/api/", (req, res) => {
-  res.send("success").status(200);
+  res.send("Cannot GET /");
+});
+
+app.post("/api/checkUser", (req, res) => {
+  const userId = req.body.uid;
+  const userCheck = mongoFunction.userIdentifer(userId);
+  res.send({ status: userCheck.status });
 });
 
 app.get("/api/validateToken", jwtValidate, (req, res) => {
